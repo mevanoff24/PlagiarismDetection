@@ -37,9 +37,9 @@ if __name__ == '__main__':
     parser.add_argument('--output-data-dir', type=str, default=os.environ['SM_OUTPUT_DATA_DIR'])
     parser.add_argument('--model-dir', type=str, default=os.environ['SM_MODEL_DIR'])
     parser.add_argument('--data-dir', type=str, default=os.environ['SM_CHANNEL_TRAIN'])
-    parser.add_argument('--regularization', type=float, default=1.0, help='regularization param')
     
     ## TODO: Add any additional arguments that you will need to pass into your model
+    parser.add_argument('--C', type=float, default=1.0, help='regularization')
     
     # args holds all passed-in arguments
     args = parser.parse_args()
@@ -57,7 +57,7 @@ if __name__ == '__main__':
     
 
     ## TODO: Define a model 
-    model = LogisticRegression(random_state=100, C=args['regularization'])
+    model = LogisticRegression(random_state=100, C=args.C)
     
     
     ## TODO: Train the model
